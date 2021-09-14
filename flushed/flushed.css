@@ -1,9 +1,13 @@
-canvas {
-    width: 50%;
-    height: 50%;
-}
-.controls {
-    position: absolute;
-    right: 10px;
-    display: inline;
+canvas {
+  width: 50%;
+
+  height: 50%;
+}
+
+.controls {
+  position: absolute;
+
+  right: 10px;
+
+  display: inline;
 }
