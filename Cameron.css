@@ -1,0 +1,171 @@
+@keyframes title {
+    from { left: 100%; }
+    to { left: -100%; }
+}
+
+h1 {
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+    left: 100%;
+}
+
+body {
+    overflow: hidden;
+    background-color: #222;
+	text-align: center;
+}
+
+#camrage {
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    position: absolute;
+    color: blue;
+    animation: title 6s linear 0s infinite forwards;
+}
+
+b {
+    margin: 20px;
+}
+
+button {
+    border: 2px solid black;
+    border-radius: 20px;
+    transition: background-color 2s;
+    transition: color 1s;
+}
+
+button:hover {
+    background-color: #222;
+    color: white;
+}
+
+center {
+    color: white;
+    position: relative;
+}
+
+#fixedControl {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    z-index: 6;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#mainText {
+	font-size: 12pt;
+	font-family: Arial;
+	text-align: center;
+	border: 2px solid black;
+	background-color: transparent;
+	margin: auto;
+	width: 80%;
+	height: 200px;
+	max-height: 400px;
+	overflow: auto;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+	white-space: nowrap;
+	width: 60px;
+	height: 30px;
+	border-radius: 30px;
+	border: 2px solid #ddd;
+	background-color: #EEE;
+	display: inline-block;
+	transition: background-color 0.5s linear;
+	margin: auto;
+	top: 12px;
+}
+input[type="checkbox"] + label:hover {
+	cursor: pointer;
+}
+input[type="checkbox"] + label::before {
+	content: "";
+	white-space: nowrap;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background-color: #fff;
+	display: block;
+	margin-right: 5px;
+	transition: margin 0.1s linear;
+	box-shadow: 0px 0px 5px #aaa;
+}
+input[type="checkbox"]:checked+label{
+  background-color: #aaa;
+}
+input[type="checkbox"]:checked+label::before {
+  margin: 0 0 0 30px;
+}
+
+input[type="checkbox"] + label {
+	position: relative;
+}
+
+input {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 4px;
+	transition: background-color 1s;
+	text-align: center;
+}
+
+input:disabled {
+	border: 2px solid black;
+	background-color: #222;
+	border-radius: 4px;
+	color: #aaa;
+}
+
+.ControlContainer {
+	font-family: "Corbel Light";
+    background-color: #aaa;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    margin: auto;
+    display: block;
+	overflow: auto;
+}
+
+th {
+	display: block;
+	padding: auto;
+	margin: 5px;
+}
+
+tr {
+    display: table-cell;
+    border: 2px solid black;
+    border-radius: 4px;
+	padding: 20px;
+	padding-left: 100px;
+	padding-right: 100px;
+	margin: auto;
+}
+
+table {
+	display: inline-block;
+}
+
+img {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	display: block;
+	z-index: -1;
+}
