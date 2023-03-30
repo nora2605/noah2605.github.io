@@ -87,63 +87,73 @@
         <button type="submit" id="submit-btn">Submit</button>
     </form>
     <script type="text/javascript">
-        // Obtain the IP address using the https://api.ipify.org/?format=json API
-        let ipAddress = '';
-        fetch('https://api.ipify.org/?format=json')
-            .then(response => response.json())
-            .then(data => ipAddress = data.ip)
-            .catch(error => {
-                console.error(error);
-                const errorMessage = document.createElement('div');
-                errorMessage.textContent = 'An error occurred while obtaining the IP address.';
-                errorMessage.style.color = 'red';
-                errorMessage.style.textAlign = 'center';
-                document.querySelector('form').appendChild(errorMessage);
-                alert('An error occurred while obtaining the IP address.');
-            });
+        // Obtain the IP address using https://api.ipify.org/
+  let ipAddress = '';
+  fetch('https://api.ipify.org/?format=json')
+    .then(response => response.json())
+    .then(data => ipAddress = data.ip)
+    .catch(error => {
+      console.error(error);
+      const errorMessage = document.createElement('div');
+      errorMessage.textContent = 'An error occurred while obtaining the IP address.';
+      errorMessage.style.color = 'red';
+      errorMessage.style.textAlign = 'center';
+      document.querySelector('form').appendChild(errorMessage);
+    });
 
-        // Check for the URL argument for the topic and disable the topic field if it is present
-        const urlParams = new URLSearchParams(window.location.search);
-        const topicParam = urlParams.get('topic');
-        if (topicParam) {
-            document.getElementById('topic').value = topicParam;
-            if (topicParam.length > 0) {
-                document.getElementById('topic').readOnly = true;
-            }
-        }
+  // Identify the user using the User-Agent header if the IP address is not available
+  let userAgent = '';
+  try {
+    userAgent = navigator.userAgent;
+  } catch (error) {
+    console.error(error);
+  }
 
-        // Handle form submission
-        const form = document.getElementById('opinion-form');
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            const topic = document.getElementById('topic').value;
-            const opinion = document.getElementById('opinion').value;
-            const content = `IP: ${ipAddress}\nTopic: ${topic}\nOpinion: ${opinion}`;
-            const payload = { content };
+  // Check for the URL argument for the topic and disable the topic field if it is present
+  const urlParams = new URLSearchParams(window.location.search);
+  const topicParam = urlParams.get('topic');
+  if (topicParam) {
+    document.getElementById('topic').value = topicParam;
+    if (topicParam.length > 0) {
+      document.getElementById('topic').readOnly = true;
+    }
+  }
+
+  // Handle form submission
+  const form = document.getElementById('opinion-form');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const topic = document.getElementById('topic').value;
+    const opinion = document.getElementById('opinion').value;
+    const identifier = ipAddress.length > 0 ? ipAddress : userAgent;
+    const content = `Identifier: ${identifier}\nTopic: ${topic}\nOpinion: ${opinion}`;
+    const payload = { content };
+      // Yes i KNOW it's genius to have a publicly exposed webhook URL
+      // if you look at this you at least looked at what the fuck you were putting your information in
+      // congrats
+      
             fetch('https://discord.com/api/webhooks/1091080099501187132/_nOqbIs_oC9RT4UZgBBv0yxSpCGXnCbK8yioku9taHP3jvbAGtjsfrbEs_-gi5KpruVd', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    alert('Opinion submitted successfully!');
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error(error);
-                    const errorMessage = document.createElement('div');
-                    errorMessage.textContent = 'An error occurred while submitting the opinion.';
-                    errorMessage.style.color = 'red';
-                    errorMessage.style.textAlign = 'center';
-                    document.querySelector('form').appendChild(errorMessage);
-                    alert('An error occurred while submitting the opinion.');
-                });
-        });
+            method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        form.reset();
+      })
+      .catch(error => {
+        console.error(error);
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'An error occurred while submitting the opinion.';
+        errorMessage.style.color = 'red';
+        errorMessage.style.textAlign = 'center';
+        document.querySelector('form').appendChild(errorMessage);
+      });
+  });
     </script>
 </body>
 
