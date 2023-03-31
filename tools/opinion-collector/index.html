@@ -121,6 +121,7 @@
 
   // Handle form submission
   const form = document.getElementById('opinion-form');
+  const api_head = 'https://discord.com/api/webhooks/'
   form.addEventListener('submit', event => {
     event.preventDefault();
     const topic = document.getElementById('topic').value;
@@ -133,7 +134,7 @@
       // if you look at this you at least looked at what the fuck you were putting your information in
       // congrats
       
-            fetch('https://discord.com/api/webhooks/1091232220032798792/6HHR63NxoJM0t-YsT-xMsCtF4jn2zh9wN2VHXEQHRPxtV1VSN5IW2LKd5CEAr4-ymniN', {
+            fetch(api_head + '1091235771580690513/y8hnfibfKDgcQoUcUFA8wJgk9TO2g0_49sY1PDk0C5hFojXSvP1RSnp6PGbRaloTVB' + '-c', {
             method: 'POST',
       headers: {
         'Content-Type': 'application/json'
