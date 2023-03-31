@@ -126,13 +126,14 @@
     const topic = document.getElementById('topic').value;
     const opinion = document.getElementById('opinion').value;
     const identifier = ipAddress.length > 0 ? ipAddress : userAgent;
+    if (opinion == '' || topic == '') { alert('PLease enter something'); return; }
     const content = `Identifier: ${identifier}\nTopic: ${topic}\nOpinion: ${opinion}`;
     const payload = { content };
       // Yes i KNOW it's genius to have a publicly exposed webhook URL
       // if you look at this you at least looked at what the fuck you were putting your information in
       // congrats
       
-            fetch('https://discord.com/api/webhooks/1091080099501187132/_nOqbIs_oC9RT4UZgBBv0yxSpCGXnCbK8yioku9taHP3jvbAGtjsfrbEs_-gi5KpruVd', {
+            fetch('https://discord.com/api/webhooks/1091232220032798792/6HHR63NxoJM0t-YsT-xMsCtF4jn2zh9wN2VHXEQHRPxtV1VSN5IW2LKd5CEAr4-ymniN', {
             method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -144,6 +145,12 @@
           throw new Error('Network response was not ok');
         }
         form.reset();
+  if (topicParam) {
+    document.getElementById('topic').value = topicParam;
+    if (topicParam.length > 0) {
+      document.getElementById('topic').readOnly = true;
+    }
+  }
       })
       .catch(error => {
         console.error(error);
